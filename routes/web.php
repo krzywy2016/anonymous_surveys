@@ -12,7 +12,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard')->middleware('auth');
+Route::get('/edit-survey', [HomeController::class, 'editSurvey'])->name('editSurvey')->middleware('auth');
 
 // Panel administratora
 Route::prefix('admin')->group(function () {

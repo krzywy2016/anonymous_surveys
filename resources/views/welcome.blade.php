@@ -16,9 +16,9 @@
             <div class="col-md-6">
                 <div class="d-flex flex-column justify-content-center align-items-center h-100">
                     <!-- Przycisk do zalogowania -->
-                    <a href="#" class="btn btn-primary mb-3">Zaloguj się</a>
+                    <a href="{{asset('/login')}}" class="btn btn-primary mb-3">Zaloguj się</a>
                     <!-- Przycisk do zarejestrowania -->
-                    <a href="#" class="btn btn-success">Zarejestruj się</a>
+                    <a href="{{asset('/register')}}" class="btn btn-success">Zarejestruj się</a>
                 </div>
             </div>
             <!-- Prawa strona (połowa ekranu) -->

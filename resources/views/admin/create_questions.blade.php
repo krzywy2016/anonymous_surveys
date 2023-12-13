@@ -2,6 +2,12 @@
 
 @section('content')
     <div class="container" id="app">
+        <div class="row">
+            <h3>{{$survey->title}}</h3>
+        </div>
+        <div class="row">
+            {{$survey->description}}
+        </div>
         {% questions %}
         {{-- Modal z wyborem typu pytania --}}
         <div id="chooseModal" class="modal" tabindex="-1" role="dialog">

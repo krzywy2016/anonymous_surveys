@@ -4,5 +4,5 @@ namespace App\Interfaces;
 
 interface SurveyInterface
 {
-    public function getSurvey();
+    public function getSurveyList();
 }

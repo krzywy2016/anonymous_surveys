@@ -26,7 +26,7 @@
                 <div class="row">
                     <div v-for="survey in surveys" :key="survey.id" class="col-3">
                         <div class="card mb-3">
-                            <a href="{{route('editSurvey')}}">
+                            <a :href="'/edit-survey/' + survey.id">
                                 <img src="{{ asset('placeholder.png') }}" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title">{% survey.title %}</h5>

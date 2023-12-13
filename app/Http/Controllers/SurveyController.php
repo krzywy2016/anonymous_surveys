@@ -17,7 +17,7 @@ class SurveyController extends Controller
 
     public function get()
     {
-        return $this->surveyService->getSurvey();
+        return $this->surveyService->getSurveyList();
     }
     
     public function create(/* StoreSurveyRequest */ Request $request)

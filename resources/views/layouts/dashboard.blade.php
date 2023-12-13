@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 
 <head>
     <meta charset="UTF-8">
@@ -9,14 +9,25 @@
     {{-- Vue --}}
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js" integrity="sha512-QkuqGuFAgaPp3RTyTyJZnB1IuwbVAqpVGN58UJ93pwZel7NZ8wJOGmpO1zPxZGehX+0pc9/dpNG9QdL52aI4Cg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css" integrity="sha512-q3eWabyZPc1XTCmF+8/LuE1ozpg5xxn7iO89yfSOd5/oKvyqLngoNGsx8jq92Y8eXJ/IRxQbEC+FGSYxtk2oiw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .spinner-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
 
+        .fa-spinner {
+            font-size: 2em;
+        }
+    </style>
 
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
 </head>
-
 <body>
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="#">
@@ -27,35 +38,39 @@
     </nav>
     <div class="container" id="app">
         <div class="row mt-5">
-            <button class="btn btn-dark" {{-- data-toggle="modal" data-target="#surveyModal" --}} @click="openModal()">Nowa
-                ankieta</button>
+            <button class="btn btn-dark" @click="openModal()">
+                <i class="fas fa-poll-h"></i> Nowa ankieta
+            </button>
         </div>
-        <div class="row mt-3">
+        <div class="row mt-5">
             <div class="btn-group" role="group">
-                <button type="button" class="btn btn-dark mr-1" @click="showRecentSurveys"><i class="far fa-clock"></i> Ostatnio dodane</button>
-                <button type="button" class="btn btn-dark" @click="showFilledSurveys"><i class="far fa-check-square"></i> Ostatnio wypełnione</button>
+                <button type="button" :class="{ 'btn': true, 'btn-secondary': !recentSurveysActive, 'btn-info': recentSurveysActive, 'mr-1': true }" @click="getSurveys">
+                    <i class="far fa-clock"></i> Ostatnio dodane
+                </button>
+                <button type="button" :class="{ 'btn': true, 'btn-secondary': !filledSurveysActive, 'btn-info': filledSurveysActive }" @click="getCompletedSurveys">
+                    <i class="far fa-check-square"></i> Ostatnio wypełnione
+                </button>
             </div>
         </div>
-        <div class="row mt-3">
-            <div class="col-3">
-                <div class="card mb-3">
-                    <img src="{{ asset('placeholder.png') }}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
+        <div class="row mt-3 pl-0">
+            <div class="col-12 pl-0">
+                <div v-if="loading" class="spinner-container">
+                    <i class="fas fa-spinner fa-spin"></i>
                 </div>
-            </div>
-            <div class="col-3">
-                <div class="card mb-3">
-                    <img src="{{ asset('placeholder.png') }}" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                <template v-else>
+                    <div class="row">
+                        <div v-for="survey in surveys" :key="survey.id" class="col-3">
+                            <div class="card mb-3">
+                                <img src="{{ asset('placeholder.png') }}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">{% survey.title %}</h5>
+                                    <p class="card-text">{% survey.description %}</p>
+                                    <p class="card-text"><small class="text-muted">Dodana: {% formatUpdateTime(survey.updated_at) %}</small></p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </template>
             </div>
         </div>
     </div>
@@ -72,7 +87,6 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <!-- Dodaj formularz ankietowy Vue -->
                     <form @submit.prevent="submitSurvey">
                         <div class="form-group">
                             <label for="surveyTitle">Tytuł ankiety:</label>
@@ -88,54 +102,80 @@
             </div>
         </div>
     </div>
-
-    <!-- ... reszta kodu ... -->
-
+    
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
         new Vue({
             el: '#app',
+            delimiters: ['{%', '%}'],
+            csrfToken: "{{ csrf_token() }}",
             data: {
-                surveyTitle: '',
-                surveyDescription: '',
+                loading: true,
+                recentSurveysActive: true,
+                filledSurveysActive: false,
+                surveys: [],
+                form: {
+                    surveyTitle: '',
+                    surveyDescription: '',
+                }
             },
             methods: {
-                showRecentSurveys() {
-                    /* this.displayRecent = true;
-                    this.displayFilled = false; */
-                },
-                showFilledSurveys() {
-                    /* this.displayRecent = false;
-                    this.displayFilled = true; */
-                },
                 openModal() {
                     $('#surveyModal').modal('show');
-                    console.log('klikniete')
                 },
                 closeModal() {
                     $('#surveyModal').modal('hide');
                 },
                 submitSurvey() {
-                    // Wysyłanie ankiety za pomocą Axios
-                    axios.post('/api/surveys', {
-                            title: this.surveyTitle,
-                            description: this.surveyDescription,
-                        })
-                        .then(response => {
-                            console.log('Ankieta dodana!', response.data);
-                            // Dodaj logikę obsługi po udanym dodaniu ankiety
-                            // np. odświeżenie listy ankiet itp.
-                            this.closeModal();
-                        })
-                        .catch(error => {
-                            console.error('Błąd dodawania ankiety:', error.response.data);
-                            // Dodaj logikę obsługi błędu
-                        });
+                    console.log(this.form)
+                    axios.post("{{route('api.survey.create')}}", {
+                        data: this.form
+                    })
+                    .then(response => {
+                        console.log('Ankieta dodana!', response.data);
+                        this.closeModal();
+                    })
+                    .catch(error => {
+                        console.error('Błąd dodawania ankiety:', error.response.data);
+                    });
+                },
+                getSurveys() {
+                    this.recentSurveysActive = true;
+                    this.filledSurveysActive = false,
+                    this.loading = true;
+                    axios.get("{{route('api.getSurveys')}}", {
+                        //
+                    }).then(response => {
+                        this.surveys = response.data;
+                    }).catch(error => {
+                        //
+                    })
+                    .finally(() => {
+                        this.loading = false;
+                    });
+                },
+                getCompletedSurveys() {
+                    this.recentSurveysActive = false;
+                    this.filledSurveysActive = true,
+                    this.loading = true;
+                    axios.get("{{route('api.getSurveys')}}", {
+                        //
+                    }).then(response => {
+                        this.surveys = response.data;
+                    }).catch(error => {
+                        //
+                    })
+                    .finally(() => {
+                        this.loading = false;
+                    });
+                },
+                formatUpdateTime(updatedAt) {
+                    return moment(updatedAt).format('DD.MM.YYYY HH:mm');
                 },
             },
             mounted: function() {
-                console.log('test');
+                this.getSurveys();
             },
         });
     </script>

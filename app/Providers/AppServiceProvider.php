@@ -5,6 +5,9 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 
+use App\Interfaces\SurveyInterface;
+use App\Services\SurveyService;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -14,7 +17,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(SurveyInterface::class, function(){
+            return new SurveyService();
+        });
     }
 
     /**

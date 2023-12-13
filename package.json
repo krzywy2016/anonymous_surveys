@@ -22,6 +22,7 @@
     },
     "dependencies": {
         "dayspan-vuetify": "^0.4.0",
+        "moment": "^2.29.1",
         "vue-meeting-selector": "^2.0.0-beta-3"
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SurveyController;
@@ -8,8 +9,10 @@ use App\Http\Controllers\UserController;
 
 
 Route::get('/', function () {
-    return view('layouts.dashboard');
+    return view('welcome');
 });
+
+Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 
 // Panel administratora
 Route::prefix('admin')->group(function () {

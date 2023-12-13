@@ -7,8 +7,6 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\CustomerObiect;
-use App\Http\Controllers\CustomerObiectsController;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -34,28 +32,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        if(Auth::user()->role == 'admin')
-        {
-            return redirect()->route('dashboard');
-        }
-
-        if(Auth::user()->role == 'admin' || 'manager')
-        {
-            // metody które pozwalają ustawić id jakiegokolwiek obiektu albo przypisać 0 aby wyświetlić moduł do stworzenia biznesu
-            $getId = CustomerObiect::where('customer_id', Auth::user()->customer_id)->first();
-            if($getId){
-                $id = $getId->id;
-            }else{
-                $id = 0;
-            }
-
-            return redirect()->route('dashboard', $id);
-        }
-
-        if(Auth::user()->role == 'client')
-        {
-            return redirect()->route('clientpanel');
-        }
+        return redirect()->route('dashboard');
     }
 
     /**

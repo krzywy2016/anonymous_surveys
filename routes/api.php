@@ -16,7 +16,7 @@ use App\Http\Controllers\SurveyController;
 */
 
 Route::get('/get-survey', [SurveyController::class, 'get'])->name('api.getSurveys');
-Route::post('/survey-create', [SurveyController::class, 'create'])->name('api.survey.create');
+Route::post('/survey-create', [SurveyController::class, 'create'])->name('api.surveyCreate');
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

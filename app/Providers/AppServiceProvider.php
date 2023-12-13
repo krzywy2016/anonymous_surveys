@@ -8,6 +8,9 @@ use Illuminate\Pagination\Paginator;
 use App\Interfaces\SurveyInterface;
 use App\Services\SurveyService;
 
+use App\Interfaces\QuestionInterface;
+use App\Services\QuestionService;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -19,6 +22,9 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(SurveyInterface::class, function(){
             return new SurveyService();
+        });
+        $this->app->bind(QuestionInterface::class, function(){
+            return new QuestionService();
         });
     }
 

@@ -26,7 +26,6 @@ class SurveyController extends Controller
         $data = $request->all();
         $this->surveyService->createSurvey($data['data']);
 
-        // Dodaj kod obsługi po utworzeniu ankiety, np. przekierowanie, odpowiedź JSON itp.
         return response()->json(['message' => 'Ankieta została utworzona pomyślnie'], 201);
     }
 }

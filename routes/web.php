@@ -13,7 +13,7 @@ Route::get('/', [HomeController::class, 'index'])->name('index')->middleware('au
 Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard')->middleware('auth');
 Route::get('/edit-survey/{id}', [HomeController::class, 'editSurvey'])->name('editSurvey')->middleware('auth');
 
-Route::get('/show-survey', [HomeController::class, 'showSurvey'])->name('showSurvey');
+Route::get('/show-survey/{id}', [HomeController::class, 'showSurvey'])->name('showSurvey');
 
 
 // Załączenie routingów autentykacji

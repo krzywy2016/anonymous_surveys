@@ -4,15 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Interfaces\SurveyInterface;
+use App\Interfaces\QuestionInterface;
 use Auth;
 
 class HomeController extends Controller
 {
     protected $surveyService;
+    protected $questionService;
 
-    public function __construct(SurveyInterface $surveyService)
+    public function __construct(SurveyInterface $surveyService, QuestionInterface $questionService)
     {
         $this->surveyService = $surveyService;
+        $this->questionService = $questionService;
     }
 
     public function index()
@@ -32,11 +35,13 @@ class HomeController extends Controller
     public function editSurvey(int $id)
     {
         $survey = $this->surveyService->getSurvey($id);
-        return view('admin.create_questions', compact('survey'));
+        $questions = $this->questionService->getQuestions($id);
+        return view('admin.create_questions', compact('survey', 'questions'));
     }
 
-    public function showSurvey()
+    public function showSurvey($id)
     {
-        return view('survey.index');
+        $survey = $this->surveyService->getSurvey($id);
+        return view('survey.index', compact('survey'));
     }
 }

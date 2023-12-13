@@ -5,7 +5,7 @@ use App\Http\Controllers\UsersController;
 
 
 Route::get('/', function () {
-    return '404';
+    return view('welcome');
 });
 
 require __DIR__.'/auth.php';

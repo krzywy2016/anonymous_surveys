@@ -1,0 +1,67 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+
+class User extends Authenticatable implements MustVerifyEmail // to implementuje email weryfikacyjny z tokenem
+{
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'email',
+        'phone',
+        'password',
+        'group_id',
+        'role'
+    ];
+
+    /**
+     * The attributes that should be hidden for serialization.
+     *
+     * @var array<int, string>
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    public function customers()
+    {
+        return $this->belongsTo(Customer::class, 'customer_id');
+    }
+
+    public function customerGroups()
+    {
+        return $this->belongsTo(CustomerGroup::class, 'id');
+    }
+
+    public function profileImages()
+    {
+        return $this->hasOne(Images::class, 'obiect_id');
+    }
+
+    public function staff()
+    {
+        return $this->hasOne(Staff::class, 'user_id', 'id');
+    }
+}

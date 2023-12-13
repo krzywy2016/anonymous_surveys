@@ -1,0 +1,355 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap');
+@import url('https://fonts.cdnfonts.com/css/product-sans');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200&display=swap');
+
+@media only screen and (max-width: 600px) {
+    body {
+      background-color: lightblue;
+    }
+  }
+
+body {
+    font-family: 'Nunito', sans-serif;
+}
+h3 {
+    font-family: 'Nunito', sans-serif;
+}
+hr {
+    border: 0;
+    clear:both;
+    display:block;
+    width: 96%;
+    background-color:#7e7e7e;
+    height: 1px;
+  }
+.shadow {
+  -moz-box-shadow:    3px 3px 5px 6px #ccc;
+  -webkit-box-shadow: 3px 3px 5px 6px #ccc;
+  box-shadow:         3px 3px 5px 6px #ccc;
+}
+.top_menu {
+  background-color: #1b242f;
+  font-family: 'Calibri', sans-serif;
+  color: #fff;
+}
+/* ----------------------- */
+.menu {
+    font-family: 'Nunito', sans-serif;
+  color: rgb(0, 0, 0);
+}
+ul {
+    list-style-type: none;
+    overflow: hidden;
+  }
+
+li {
+    float: left;
+    padding-right: 30px;
+    font-size: 100%;
+  }
+
+li a {
+    display: block;
+    color: rgb(24, 24, 24);
+    text-decoration: none;
+  }
+/* ----------------------- */
+.search {
+  background-image: url('stadion.jpg');
+  background-repeat: no-repeat;
+  min-height: 300px;
+}
+.harmonogram {
+  background-color: #d8cca985;
+}
+
+/* --------------------- */
+.fc td, .fc th {
+  border-width: 1px !important;
+  border-color: #aaa !important;
+}
+/* ----------------------- */
+.obiect_card a{
+    color: rgb(24, 24, 24);
+    text-decoration: none;
+}
+.card-title{
+    font-weight: bold;
+}
+
+/* calendarz wolnych terminów */
+  .light{
+    background-color: #fff;
+  }
+  .dark{
+    margin-left: 65px;
+  }
+
+  .calendar{
+    /*width:370px;*/
+    min-height: 300px;
+    box-shadow: 0px 0px 35px -16px rgba(0,0,0,0.45);
+    font-family: 'Roboto', sans-serif;
+    padding: 20px 30px;
+    color:#363b41;
+    display: inline-block;
+  }
+
+  .calendar_header{
+    border-bottom: 2px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .header_copy{
+    color:#A39D9E;
+    font-size:20px;
+  }
+  .calendar_plan{
+    margin:20px 0 40px;
+  }
+  .cl_plan{
+    width:100%;
+    height: 140px;
+    background-image: linear-gradient(-222deg, #FF8494, #ffa9b7);
+    box-shadow: 0px 0px 52px -18px rgba(0, 0, 0, 0.75);
+    padding:30px;
+    color:#fff;
+  }
+  .cl_title{
+
+  }
+  .cl_copy{
+    font-size:20px;
+    margin: 20px 0;
+    display: inline-block;
+  }
+
+  .cl_add{
+    display: inline-block;
+    width: 40px;
+    height:40px;
+    border-radius:50%;
+    background-color: #fff;
+    cursor: pointer;
+    margin:0 0 0 65px;
+    color:#c2c2c2;
+    padding: 11px 13px;
+  }
+  .calendar_events{
+    color:#A39D9E;
+  }
+  .ce_title{
+    font-size:14px;
+  }
+
+  .event_item{
+    margin: 18px 0;
+    padding:5px;
+    cursor: pointer;
+  }
+  .event_item:hover{
+    background-image: linear-gradient(-222deg, #9de0b4, #bffabd);
+    box-shadow: 0px 0px 52px -18px rgba(0, 0, 0, 0.75);
+  }
+
+  .ei_Dot,.ei_Title{
+    display:inline-block;
+  }
+
+  .ei_Dot{
+    border-radius:50%;
+    width:10px;
+    height: 10px;
+    background-color: #00691a;
+    box-shadow: 0px 0px 52px -18px rgba(0, 0, 0, 0.75);
+  }
+  .dot_active{
+    background-color: #9cfce4;
+  }
+
+  .ei_Title{
+    margin-left:10px;
+    color:#363b41;
+  }
+
+  .ei_Copy{
+    font-size:12px;
+    margin-left:27px;
+  }
+
+  .dark{
+    background-image: linear-gradient(-222deg, #646464, #454545);
+    color:#fff;
+  }
+  .header_title,.ei_Title,.ce_title{
+    color:rgb(0, 0, 0);
+  }
+/* FOOOOTER */
+.footer-section {
+    background: #151414;
+    position: relative;
+  }
+  .footer-cta {
+    border-bottom: 1px solid #373636;
+  }
+  .single-cta i {
+    color: #ff5e14;
+    font-size: 30px;
+    float: left;
+    margin-top: 8px;
+  }
+  .cta-text {
+    padding-left: 15px;
+    display: inline-block;
+  }
+  .cta-text h4 {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .cta-text span {
+    color: #757575;
+    font-size: 15px;
+  }
+  .footer-content {
+    position: relative;
+    z-index: 2;
+  }
+  .footer-pattern img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 330px;
+    background-size: cover;
+    background-position: 100% 100%;
+  }
+  .footer-logo {
+    margin-bottom: 30px;
+  }
+  .footer-logo img {
+      max-width: 350px;
+  }
+  .footer-text p {
+    margin-bottom: 14px;
+    font-size: 14px;
+        color: #7e7e7e;
+    line-height: 28px;
+  }
+  .footer-social-icon span {
+    color: #fff;
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 20px;
+  }
+  .footer-social-icon a {
+    color: #fff;
+    font-size: 16px;
+    margin-right: 15px;
+  }
+  .footer-social-icon i {
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    line-height: 38px;
+    border-radius: 50%;
+  }
+  .facebook-bg{
+    background: #3B5998;
+  }
+  .twitter-bg{
+    background: #55ACEE;
+  }
+  .google-bg{
+    background: #DD4B39;
+  }
+  .footer-widget-heading h3 {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 40px;
+    position: relative;
+  }
+  .footer-widget-heading h3::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -15px;
+    height: 2px;
+    width: 50px;
+    background: #ff5e14;
+  }
+  .footer-widget ul li {
+    display: inline-block;
+    float: left;
+    width: 50%;
+    margin-bottom: 12px;
+  }
+  .footer-widget ul li a:hover{
+    color: #ff5e14;
+  }
+  .footer-widget ul li a {
+    color: #878787;
+    text-transform: capitalize;
+  }
+  .subscribe-form {
+    position: relative;
+    overflow: hidden;
+  }
+  .subscribe-form input {
+    width: 100%;
+    padding: 14px 28px;
+    background: #2E2E2E;
+    border: 1px solid #2E2E2E;
+    color: #fff;
+  }
+  .subscribe-form button {
+      position: absolute;
+      right: 0;
+      background: #ff5e14;
+      padding: 13px 20px;
+      border: 1px solid #ff5e14;
+      top: 0;
+  }
+  .subscribe-form button i {
+    color: #fff;
+    font-size: 22px;
+    transform: rotate(-6deg);
+  }
+  .copyright-area{
+    background: #202020;
+    padding: 25px 0;
+  }
+  .copyright-text p {
+    margin: 0;
+    font-size: 14px;
+    color: #878787;
+  }
+  .copyright-text p a{
+    color: #ff5e14;
+  }
+  .footer-menu li {
+    display: inline-block;
+    margin-left: 20px;
+  }
+  .footer-menu li:hover a{
+    color: #ff5e14;
+  }
+  .footer-menu li a {
+    font-size: 14px;
+    color: #878787;
+  }
+  /* regulamin */
+  .reg_nag {
+      text-align: center;
+      font-weight: bold;
+  }
+  .reg_pod {
+    text-indent: 20px;
+  }
+
+
+
+

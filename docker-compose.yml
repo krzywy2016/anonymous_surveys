@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+      - mailhog
+      - phpmyadmin
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: surveys
+      MYSQL_USER: programmer
+      MYSQL_PASSWORD: pass
+    ports:
+      - "3307:3306"
+  mailhog:
+    image: mailhog/mailhog:latest
+    ports:
+      - "8025:8025"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_USER: programmer
+      PMA_PASSWORD: pass
+    ports:
+      - "8081:80"
+    depends_on:
+    - phpmyadmin-db

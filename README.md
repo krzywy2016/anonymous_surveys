@@ -21,46 +21,57 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+Wymagania do Projektu Ankiety
+Założenia ogólne
+## Panel Administratora:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Możliwość dodania nowej ankiety.
+- Definiowanie widoczności ankiety dla użytkowników (status opublikowany / nieopublikowany).
+- Definiowanie otwartej / zamkniętej ankiety.
+- Zdefiniowanie URL Slug dostępnego dla ankiety do wypełnienia.
+- Dodawanie dowolnej liczby pytań.
+- Usuwanie oraz edycja pytań.
+- Zmienianie kolejności pytań.
+- Wybór rodzaju odpowiedzi do danego pytania (tekstowe, wybór odpowiedzi A/B/C/D, Tak/Nie, wybór wielokrotny - multicheckbox).
+- 'Blokowanie' możliwości wypełnienia pytań w razie zaznaczenia odpowiedzi Tak/Nie (np. odpowiedź na pytanie 1. Tak blokuje pytania 2. oraz 3.).
+- Lista Ankiet z Paginacją:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Widoczna lista dodanych ankiet.
+- Zastosowanie paginacji (maksymalnie 10 wpisów na stronie).
+- Po kliknięciu we wpis - ogólne podsumowanie / statystyki na podstawie odpowiedzi wszystkich użytkowników.
+- Lista Ostatnich Wypełnionych Ankiet z Paginacją:
 
-## Laravel Sponsors
+## Lista ostatnich wypełnionych ankiet z zastosowaniem paginacji (maksymalnie 10 wpisów na stronie).
+- Przy wpisie odnośnik do modyfikacji szablonu ankiety (punkt 1.) wraz z nazwą główną i datą wypełnienia.
+- Możliwość modyfikacji odpowiedzi oraz usuwania całego wpisu.
+## Widok Użytkownika:
+a) Lista otwartych, opublikowanych ankiet z odnośnikiem do ich wypełnienia.
+b) Możliwość dostania się na zamkniętą ankietę (znając odpowiedni URL).
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+##Sprawy Ogólne:
+a) Obsługa wszelkich błędów i niezgodności użytkownika, administratora bądź całego systemu.
+b) Logowanie operacji tworzenia / modyfikacji / usuwania szablonu ankiety.
+c) Blokowanie możliwości wypełnienia przez użytkownika ankiety wcześniej przez niego uzupełnionej (przez 15 minut od czasu przesłania).
 
-### Premium Partners
+Techniczne Wymagania
+## Logika Aplikacji:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-- **[Romega Software](https://romegasoftware.com)**
+- Zastosowanie Laravel do obsługi backendu.
+- Frontend zbudowany w oparciu o Vue.js.
+- Obsługa operacji CRUD dla ankiet i pytań.
+- Bezpieczeństwo:
 
-## Contributing
+- Autoryzacja użytkowników, różnicowanie dostępu administratora i zwykłego użytkownika.
+- Bezpieczne zarządzanie sesją i ciasteczkami.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Baza Danych:
 
-## Code of Conduct
+- Używanie bazy danych, np. MySQL.
+- Struktura bazy danych odpowiadająca modelom danych (ankiety, pytania).
+## Paginacja:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- Implementacja paginacji na frontendzie.
+- Interfejs Użytkownika:
 
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Przejrzysty i responsywny interfejs użytkownika.
+- Zastosowanie Bootstrap lub innego narzędzia do stylizacji.

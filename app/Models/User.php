@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements MustVerifyEmail // to implementuje email weryfikacyjny z tokenem
+class User extends Authenticatable /* implements MustVerifyEmail */ // to implementuje email weryfikacyjny z tokenem
 {
     use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
@@ -20,10 +20,8 @@ class User extends Authenticatable implements MustVerifyEmail // to implementuje
      */
     protected $fillable = [
         'email',
-        'phone',
         'password',
-        'group_id',
-        'role'
+        'name'
     ];
 
     /**
@@ -44,24 +42,4 @@ class User extends Authenticatable implements MustVerifyEmail // to implementuje
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function customers()
-    {
-        return $this->belongsTo(Customer::class, 'customer_id');
-    }
-
-    public function customerGroups()
-    {
-        return $this->belongsTo(CustomerGroup::class, 'id');
-    }
-
-    public function profileImages()
-    {
-        return $this->hasOne(Images::class, 'obiect_id');
-    }
-
-    public function staff()
-    {
-        return $this->hasOne(Staff::class, 'user_id', 'id');
-    }
 }

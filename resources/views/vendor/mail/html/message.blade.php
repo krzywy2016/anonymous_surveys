@@ -21,7 +21,7 @@
 {{-- Footer --}}
 @slot('footer')
 @component('mail::footer')
-© {{ date('Y') }} @lang('Bookigo.co'). @lang('Wszystkie prawa zastrzeżone.')
+© {{ date('Y') }} @lang('Surveys'). @lang('Wszystkie prawa zastrzeżone.')
 @endcomponent
 @endslot
 @endcomponent

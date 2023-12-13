@@ -44,7 +44,7 @@
 {{ $salutation }}
 @else
 @lang('Pozdrawiamy'),<br>
-Zespół Bookigo.co
+Zespół Surveys
 @endif
 
 {{-- Subcopy --}}

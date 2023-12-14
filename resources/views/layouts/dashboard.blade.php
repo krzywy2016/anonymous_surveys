@@ -33,7 +33,7 @@
     <div id="app">
         <nav class="navbar navbar-light bg-light">
             <a class="navbar-brand" href="{{route('dashboard')}}">
-                <img src="https://getbootstrap.com/docs/4.6/assets/brand/bootstrap-solid.svg" width="30" height="30"
+                <img src="{{asset('logo3.png')}}" width="30" height="30"
                     class="d-inline-block align-top" alt="">
                 Surveys
             </a>

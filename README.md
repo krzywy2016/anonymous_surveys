@@ -5,6 +5,8 @@
   Twoja przeglądarka nie obsługuje odtwarzacza wideo.
 </video>
 
+[![Watch the video](https://i.stack.imgur.com/Vp2cE.png)](video.webm)
+
 Wymagania do Projektu Ankiety
 Założenia ogólne
 ## Panel Administratora:

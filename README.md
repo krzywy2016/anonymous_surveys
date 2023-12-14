@@ -1,4 +1,9 @@
-<p align="center"><a href="https://laravel.com" target="_blank">![Screenshot](logo3.png)</a></p>
+<p align="center"><img src="logo3.png" alt="survey logo" /></p>
+
+<video width="320" height="240" controls>
+  <source src="video.webm" type="video/webm">
+  Twoja przeglądarka nie obsługuje odtwarzacza wideo.
+</video>
 
 Wymagania do Projektu Ankiety
 Założenia ogólne

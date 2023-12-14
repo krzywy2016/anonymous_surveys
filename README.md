@@ -1,9 +1,6 @@
 <p align="center"><img src="logo3.png" alt="survey logo" /></p>
 
-<video width="320" height="240" controls>
-  <source src="video.webm" type="video/webm">
-  Twoja przeglądarka nie obsługuje odtwarzacza wideo.
-</video>
+<p align="center"><img src="video.gif" alt="survey logo" /></p>
 
 [![Watch the video](https://i.stack.imgur.com/Vp2cE.png)](video.webm)
 

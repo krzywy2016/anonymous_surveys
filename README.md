@@ -2,8 +2,6 @@
 
 <p align="center"><img src="video.gif" alt="survey logo" /></p>
 
-[![Watch the video](https://i.stack.imgur.com/Vp2cE.png)](video.webm)
-
 Wymagania do Projektu Ankiety
 Założenia ogólne
 ## Panel Administratora:

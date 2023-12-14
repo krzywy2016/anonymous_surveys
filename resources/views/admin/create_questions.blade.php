@@ -3,12 +3,12 @@
 @section('content')
     <div class="container" id="app">
         <div class="row">
-            <h3>{{$survey->title}}</h3>
+            <h3>{{ $survey->title }}</h3>
         </div>
         <div class="row">
-            {{$survey->description}}
+            {{ $survey->description }}
         </div>
-        {% questions %}
+        {% questions %}<br /> {% settings %}
         {{-- Modal z wyborem typu pytania --}}
         <div id="chooseModal" class="modal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
@@ -118,9 +118,70 @@
             </div>
         </div>
 
-        <button type="button" @click="chooseQuestionType" class="btn btn-success mt-3">Dodaj pytanie</button>
-        <button type="submit" class="btn btn-primary mt-3">Zapisz ankietę</button>
+        <button type="button" @click="chooseQuestionType" class="btn btn-success mt-3"><i class="fas fa-plus"></i>
+            Dodaj pytanie</button>
+        <button type="submit" @click="saveSurvey" class="btn btn-primary mt-3"><i class="far fa-save"></i> Zapisz
+            ankietę</button>
+        <button type="submit" @click="openSettingsModal" class="btn btn-primary mt-3"><i class="fas fa-cog"></i>
+            Ustawienia ankiety</button>
 
+        <!-- Modal z suwakami ustawień -->
+        <div class="modal" id="settingsModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Ustawienia ankiety</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                            @click="closeSettingsModal">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label>Status ankiety:</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="publishedRadio" value="published"
+                                v-model="surveyStatus">
+                            <label class="form-check-label" for="publishedRadio">
+                                Opublikowana
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="unpublishedRadio" value="unpublished"
+                                v-model="surveyStatus">
+                            <label class="form-check-label" for="unpublishedRadio">
+                                Nieopublikowana
+                            </label>
+                        </div>
+
+                        <label>Stan ankiety:</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="openRadio" value="open"
+                                v-model="surveyState">
+                            <label class="form-check-label" for="openRadio">
+                                Otwarta
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="closedRadio" value="closed"
+                                v-model="surveyState">
+                            <label class="form-check-label" for="closedRadio">
+                                Zamknięta
+                            </label>
+                        </div>
+
+                        <label>Slug ankiety:</label>
+                        <input type="text" class="form-control" v-model="surveySlug">
+
+                        <!-- Dodaj inne suwaki i ustawienia według potrzeb -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            @click="closeSettingsModal">Zamknij</button>
+                        <button type="button" class="btn btn-primary" @click="saveSettings">Zapisz</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
 
@@ -132,6 +193,11 @@
             csrfToken: "{{ csrf_token() }}",
             data: {
                 questions: [],
+                settings: [],
+                surveyStatus: '',
+                surveyState: '',
+                surveySlug: '',
+                surveyId: {{$survey->id}}
             },
             methods: {
                 chooseQuestionType() {
@@ -151,10 +217,6 @@
                     if (confirm("Czy na pewno chcesz usunąć to pytanie?")) {
                         this.questions.splice(index, 1);
                     }
-                },
-                submitForm() {
-                    // Logika przesyłania formularza
-                    console.log('Zapisano ankietę:', this.questions);
                 },
                 toggleQuestion(index) {
                     // Logika otwierania/zamykania pytania
@@ -182,6 +244,40 @@
                 removeChoice(questionIndex, choiceIndex) {
                     this.questions[questionIndex].choices.splice(choiceIndex, 1);
                 },
+                openSettingsModal() {
+                    $('#settingsModal').modal('show');
+                },
+                closeSettingsModal() {
+                    $('#settingsModal').modal('hide');
+                },
+                saveSettings() {
+                    console.log('Zapisano ustawienia:', this.settings);
+
+                    this.settings = {
+                        surveyStatus: this.surveyStatus,
+                        surveyState: this.surveyState,
+                        surveySlug: this.surveySlug,
+                    };
+
+                    this.closeSettingsModal();
+                },
+                saveSurvey() {
+                    const dataToSend = {
+                        questions: this.questions,
+                        settings: this.settings,
+                        surveyId: this.surveyId
+                    };
+
+                    axios.post('../api/question-create', dataToSend)
+                        .then(response => {
+                            console.log('Odpowiedź z serwera:', response.data);
+
+                            // window.location.href = '/thank-you-page';
+                        })
+                        .catch(error => {
+                            console.error('Błąd podczas wysyłania danych:', error);
+                        });
+                }
             },
         });
     </script>

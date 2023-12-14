@@ -4,6 +4,6 @@ namespace App\Interfaces;
 
 interface QuestionInterface
 {
-    /* public function createQuestion();
-    public function getQuestion(); */
+    public function getQuestions(int $id);
+    public function saveQuestions(array $data);
 }

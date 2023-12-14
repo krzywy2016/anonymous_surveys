@@ -34,4 +34,9 @@ class SurveyService implements SurveyInterface
     {
         return Survey::find($id);
     }
+
+    public function saveSettings(int $id)
+    {
+        //
+    }
 }

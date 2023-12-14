@@ -17,7 +17,7 @@ class QuestionController extends Controller
     public function createQuestion(Request $request)
     {
         $data = $request->all();
-        $this->questionService->createQuestion($data['data']);
+        $this->questionService->saveQuestions($data);
 
         return response()->json(['message' => 'Pytanie zostało pomyślnie dodane'], 201);
     }

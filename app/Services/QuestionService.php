@@ -9,27 +9,25 @@ use Illuminate\Support\Str;
 
 class QuestionService implements QuestionInterface
 {
-    /// do przeanalizowania jeszcze funkcje    
-    public function createQuestion(array $data)
-    {
-        $user = Auth::user();
-        $slug = Str::random(10); // tymczasowa plomba
-
-        $Question = Question::create([
-            'survey_id' => $data['surveyTitle'],
-            'section_id' => $data['surveyDescription'],
-            'content' => 1,
-            'type' => $slug,
-            'options' => $slug, 
-            'rules' => $slug, 
-            'order' => $slug, 
-        ]);
-
-        return $Question; 
-    }
-
-    public function getQuestions($id)
+    public function getQuestions(int $id)
     {
         return Question::where('survey_id', $id)->get();
+    }
+
+    public function saveQuestions(array $data)
+    {
+        $questionsData = $data['questions'];
+        $i = 0;
+
+        foreach ($questionsData as $questionData) {
+            $i++;
+            $question = Question::create([
+                'survey_id' => $data['surveyId'],
+                'content' => $questionData['text'],
+                'type' => $questionData['answerType'],
+                'options' => json_encode($questionData['choices']),
+                'order' => $i,
+            ]);
+        }
     }
 }

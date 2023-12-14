@@ -8,7 +8,7 @@ use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\UserController;
 
 
-Route::get('/', [HomeController::class, 'index'])->name('index')->middleware('auth');
+Route::get('/', [HomeController::class, 'index'])->name('index');
 
 Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard')->middleware('auth');
 Route::get('/edit-survey/{id}', [HomeController::class, 'editSurvey'])->name('editSurvey')->middleware('auth');

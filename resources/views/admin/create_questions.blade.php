@@ -2,13 +2,12 @@
 
 @section('content')
     <div class="container" id="app">
-        <div class="row">
+        <div class="row mt-2">
             <h3>{{ $survey->title }}</h3>
         </div>
         <div class="row">
             {{ $survey->description }}
         </div>
-        {% questions %}<br /> {% settings %}
         {{-- Modal z wyborem typu pytania --}}
         <div id="chooseModal" class="modal" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
@@ -124,6 +123,8 @@
             ankietę</button>
         <button type="submit" @click="openSettingsModal" class="btn btn-primary mt-3"><i class="fas fa-cog"></i>
             Ustawienia ankiety</button>
+
+        <div class="row mb-3"></div>
 
         <!-- Modal z suwakami ustawień -->
         <div class="modal" id="settingsModal" tabindex="-1" role="dialog">

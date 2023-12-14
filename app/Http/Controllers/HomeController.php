@@ -42,6 +42,7 @@ class HomeController extends Controller
     public function showSurvey($id)
     {
         $survey = $this->surveyService->getSurvey($id);
-        return view('survey.index', compact('survey'));
+        $questions = $this->questionService->getQuestions($id);
+        return view('survey.index', compact('survey', 'questions'));
     }
 }

@@ -11,7 +11,6 @@ class CreateQuestionsTable extends Migration
      * 
      * @property int $id Unikalny identyfikator pytania.
      * @property int $survey_id Identyfikator ankiety, do której pytanie jest przypisane.
-     * @property int|null $section_id Identyfikator sekcji, do której pytanie jest przypisane (opcjonalne).
      * @property string $content Treść pytania.
      * @property string $type Typ pytania (domyślnie 'text').
      * @property array|null $options Opcje pytania w formie JSON (opcjonalne).
@@ -27,7 +26,6 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedInteger('survey_id');
-            $table->unsignedInteger('section_id')->nullable();
             $table->string('content');
             $table->string('type')->default('text');
             $table->json('options')->nullable();

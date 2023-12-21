@@ -15,12 +15,7 @@ use App\Http\Controllers\QuestionController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::get('/get-survey', [SurveyController::class, 'get'])->name('api.getSurveys');
-Route::post('/survey-create', [SurveyController::class, 'create'])->name('api.surveyCreate');
-
-Route::post('/question-create', [QuestionController::class, 'createQuestion'])->name('api.createQuestion');
-
+    
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

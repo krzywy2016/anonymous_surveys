@@ -21,4 +21,10 @@ class QuestionController extends Controller
 
         return response()->json(['message' => 'Pytanie zostało pomyślnie dodane'], 201);
     }
+
+    public function getQuestions($id){
+        $questions = $this->questionService->getQuestions($id);
+
+        return $questions;
+    }
 }

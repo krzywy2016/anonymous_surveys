@@ -123,6 +123,7 @@
             ankietę</button>
         <button type="submit" @click="openSettingsModal" class="btn btn-primary mt-3"><i class="fas fa-cog"></i>
             Ustawienia ankiety</button>
+            {% questions %}
 
         <div class="row mb-3"></div>
 
@@ -188,6 +189,8 @@
 
 @section('vue')
     <script>
+        const Swal = SweetAlert;
+        
         new Vue({
             el: '#app',
             delimiters: ['{%', '%}'],
@@ -272,14 +275,48 @@
                     axios.post('../api/question-create', dataToSend)
                         .then(response => {
                             console.log('Odpowiedź z serwera:', response.data);
+                                Swal.fire({
+                                    toast: true,
+                                    text: 'Pytania do ankiety zostały zapisane.',
+                                    background: '#4cdc7c',
+                                    width: '600px',
+                                    color: 'white',
+                                    position: 'top-right',
+                                    showConfirmButton: false,
+                                    timer: 4500,
+                                    timerProgressBar: true
+                                });
 
-                            // window.location.href = '/thank-you-page';
+                            window.location.href = '{{route('dashboard')}}';
                         })
                         .catch(error => {
                             console.error('Błąd podczas wysyłania danych:', error);
                         });
+                },
+                transformQuestionsFromDatabase(data) {
+                    return data.map(question => {
+                        return {
+                            text: question.content,
+                            answerType: question.type,
+                            choices: question.options ? JSON.parse(question.options) : []
+                        };
+                    });
+                },
+
+                loadQuestionsFromDatabase() {
+                    axios.get('/api/get-questions/' + this.surveyId)
+                        .then(response => {
+                            console.log(response)
+                            this.questions = this.transformQuestionsFromDatabase(response.data);
+                        })
+                        .catch(error => {
+                            console.error('Błąd podczas pobierania pytań:', error);
+                        });
                 }
             },
+            mounted() {
+                this.loadQuestionsFromDatabase();
+            }
         });
     </script>
 @endsection

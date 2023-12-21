@@ -33,7 +33,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
-            // \Illuminate\Session\Middleware\AuthenticateSession::class,
+            \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
@@ -54,9 +54,7 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $routeMiddleware = [
-        'any_obiect' => \App\Http\Middleware\AnyObiect::class, // jeśli nie istnieje żaden obiekt dla usera, przekieruj do tworzenia nowego obiektu
-        'object.owner' => \App\Http\Middleware\CheckObjectOwnership::class, // zabezpieczenie tylko strony obiektów których jest się właścicielem
-        'auth' => \App\Http\Middleware\Authenticate::class, // tylko dla zalogowanych userów
+        'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
@@ -69,6 +67,5 @@ class Kernel extends HttpKernel
         'obiects_admin' => \App\Http\Middleware\ObiectsAdminPanel::class,
         'groups_admin' => \App\Http\Middleware\GroupAdminPanel::class,
         'global_viever' => \App\Http\Middleware\GlobalViever::class,
-        'role' => \App\Http\Middleware\RoleBasedRedirect::class, // przekierowanie w zależności od roli usera
     ];
 }

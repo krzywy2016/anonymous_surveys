@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 
 <head>
     <meta charset="UTF-8">
@@ -10,18 +10,23 @@
 
 <body>
     <div class="container" id="app">
+        {{ Auth::user()}}
         <form action="{{-- {{ route('submit-survey') }} --}}" method="post">
             @csrf
             <div class="card mt-3">
                 <div class="card-header bg-info text-white">
                     <h5 class="mb-0">{{ $survey->title }}</h5>
                 </div>
-                <div class="card-body">
-                    {{ $survey->description }}<br /><br />
-                    @foreach ($questions as $index => $question)
+                <div class="card-body" style="background-color: #ecf0f1">
+                    {{ $survey->description }}
+                </div>
+            </div>
+            @foreach ($questions as $index => $question)
+                <div class="card mt-2 mb-3">
+                    <div class="card-body" style="background-color: #f5f6fa">
                         <div class="form-group">
                             <label for="question{{ $index + 1 }}">Pytanie {{ $index + 1 }}:
-                                {{ $question->content }}</label>
+                                <b>{{ $question->content }}</b></label>
 
                             @if ($question->type === 'singleChoice')
                                 @if ($question->options)
@@ -72,13 +77,14 @@
                                             name="answer{{ $index }}" required>
                                     @endif
                                 </div>
-                        @endif
+                            @endif
+                        </div>
+                    </div>
                 </div>
-                @endforeach
-            </div>
-    </div>
-    <button type="submit" class="btn btn-primary mt-3">Wyślij ankietę</button>
-    </form>
+            @endforeach
+            
+            <button type="submit" class="btn btn-success mt-3">Wyślij ankietę</button>
+        </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>

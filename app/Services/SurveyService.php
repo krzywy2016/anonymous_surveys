@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Models\Survey;
 use App\Interfaces\SurveyInterface;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
 class SurveyService implements SurveyInterface
@@ -16,13 +16,13 @@ class SurveyService implements SurveyInterface
     
     public function createSurvey(array $data)
     {
-        $user = Auth::user();
+        $user = Auth::user()->id;
         $slug = Str::random(10); // tymczasowa plomba
 
         $survey = Survey::create([
             'title' => $data['surveyTitle'],
             'description' => $data['surveyDescription'],
-            'user_id' => 1,//$user->id, plomba bo chwilowo nie działa autoryzacja
+            'user_id' => $user,
             'slug' => $slug,
             'url_to_share' => $slug, // tu trzeba będzie poprawić routing i dać default null
         ]);
@@ -38,5 +38,12 @@ class SurveyService implements SurveyInterface
     public function saveSettings(int $id)
     {
         //
+    }
+
+    public function deleteSurvey(int $id)
+    {
+        Survey::findOrFail($id)->delete();
+
+        return response()->json(['message' => 'Survey deleted successfully']);
     }
 }

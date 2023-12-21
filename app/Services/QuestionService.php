@@ -16,6 +16,8 @@ class QuestionService implements QuestionInterface
 
     public function saveQuestions(array $data)
     {
+        $this->clearQuestionsForSurvey($data['surveyId']);
+        
         $questionsData = $data['questions'];
         $i = 0;
 
@@ -30,4 +32,10 @@ class QuestionService implements QuestionInterface
             ]);
         }
     }
+
+    public function clearQuestionsForSurvey($surveyId)
+    {
+        Question::where('survey_id', $surveyId)->delete();
+    }
+
 }
